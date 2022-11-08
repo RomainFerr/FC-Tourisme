@@ -1,0 +1,35 @@
+@startuml
+class Etablissement{
+- nom : string not null
+- slug : string not null
+- description: string not null
+- numeroTelephone: string not null
+- adresse : string not null
+- ville : string not null
+- adresseMail : string not null
+- image : string not null
+- actif : bool not null
+- accueil : bool not null
+- createdAt : datetime not null
+- updateAt : datetime null
+- catégorie : array not null
+}
+
+class Ville{
+- nom : string not null
+- codePostal : string not null
+- nomDépartement : string not null
+- numDépartement : string not null
+- nomRégion : string not null
+}
+
+class Catégorie{
+- nom : string not null
+- createdAt : datetime not null
+}
+
+Etablissement "0..*"--"1..1"Ville
+Etablissement "0..*"--"1..*"Catégorie
+
+
+@enduml
