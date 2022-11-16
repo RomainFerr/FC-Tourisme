@@ -5,14 +5,14 @@ class Etablissement{
 - description: string not null
 - numeroTelephone: string not null
 - adresse : string not null
-- ville : string not null
+- ville : ville not null
 - adresseMail : string not null
 - image : string not null
 - actif : bool not null
 - accueil : bool not null
 - createdAt : datetime not null
 - updateAt : datetime null
-- catégorie : array not null
+- catégorie : categorie not null
 }
 
 class Ville{
