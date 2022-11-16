@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello EtablissementController!{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <h1 class="d-flex  justify-content-center">Liste des établissements</h1>
+
+        <div class="row g-3 d-flex justify-content-around mt-4">
+
+            {% for etablissement in etablissements %}
+
+                <div class=" col-12 col-md-6 col-lg-4">
+                    <div class="card" style="height: 100%">
+                        <div class="card-body">
+                            <h4 class="card-title">{{ etablissement.nom }}</h4>
+                        <div class="card-subtitle mb-2">
+                            {% for categorie in etablissement.categorie %}
+                                <span class="mb-1 badge bg-info">{{ categorie.nom }}</span>{% endfor %}
+                            <p>{{ etablissement.ville.codepostal }}, {{ etablissement.ville.nom }}</p></div>
+                            <p class="card-text">{{ etablissement.description | u.truncate(75, '...') }} </p>
+                        </div>
+                        <a href="" class="mx-5 mb-2 d-flex justify-content-center btn btn-primary">Voir</a>
+                    </div>
+                </div>
+
+
+            {% endfor %}
+        </div>
+        <div class="navigation d-flex justify-content-center mt-2 fixed-bottom">
+            {{ knp_pagination_render(etablissements) }}
+        </div>
+    </div>
+{% endblock %}
+
+{# Lien Utile :
+https://twig.symfony.com/doc/2.x/filters/u.html
+#}
