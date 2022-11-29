@@ -21,7 +21,7 @@
                             <p>{{ etablissement.ville.codepostal }}, {{ etablissement.ville.nom }}</p></div>
                             <p class="card-text">{{ etablissement.description | u.truncate(75, '...') }} </p>
                         </div>
-                        <a href="" class="mx-5 mb-2 d-flex justify-content-center btn btn-primary">Voir</a>
+                        <a href="{{ path('app_etablissement_slug',{'slug': etablissement.slug}) }}" class="mx-5 mb-2 d-flex justify-content-center btn btn-primary">Voir</a>
                     </div>
                 </div>
 

@@ -31,4 +31,15 @@ class EtablissementController extends AbstractController
             'etablissements' => $etablissements,
         ]);
     }
-}
+
+    #[Route('/etablissement/{slug}', name: 'app_etablissement_slug')]
+    public function getArticle($slug): Response
+    {
+
+        $etablissement = $this->etablissementRepository->findOneBy(["slug"=>$slug]);
+        return $this->render('etablissement/etablissement.html.twig', [
+            'etablissement' => $etablissement,
+        ]);}
+
+
+    }
