@@ -5,19 +5,22 @@
 {% block body %}
 
     <div class="container">
-        <h1 class="d-flex  justify-content-center">{{etablissement.nom}}</h1>
+        <h1 class="d-flex  justify-content-center">Information de {{etablissement.nom |capitalize }}</h1>
 
         <div class="row g-3 d-flex justify-content-around mt-4">
 
-                <div class=" col-12 col-md-6 col-lg-4">
-                    <div class="card" style="height: 100%">
-                        <div class="card-body">
-                            <h4 class="card-title">{{ etablissement.nom }}</h4>
-                            <div class="card-subtitle mb-2">
+                <div class=" col-10">
+                    <div class="card rounded bg-light" style="height: 100%">
+                        <div class="card-body ">
+                            <div class="row">
+                            <h2 class="card-title col-10 align-self-center">{{ etablissement.nom | capitalize }}</h2>
+                            <img class="d-flex justify-content-end col-2  " src="{{etablissement.image}}" ></div>
+                            <div class="card-subtitle mb-5">
                                 {% for categorie in etablissement.categorie %}
-                                    <span class="mb-1 badge bg-info">{{ categorie.nom }}</span>{% endfor %}
+                                    <span class="mb-1 badge bg-info">{{ categorie.nom | capitalize }}</span>{% endfor %}
                                 <p>{{ etablissement.ville.codepostal }}, {{ etablissement.ville.nom }}</p></div>
                             <p class="card-text">{{ etablissement.description }} </p>
+
                         </div>
                     </div>
                 </div>
@@ -28,6 +31,3 @@
     </div>
 {% endblock %}
 
-{# Lien Utile :
-https://twig.symfony.com/doc/2.x/filters/u.html
-#}

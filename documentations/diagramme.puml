@@ -7,12 +7,12 @@ class Etablissement{
 - adresse : string not null
 - ville : ville not null
 - adresseMail : string not null
-- image : string not null
+- image : string null
 - actif : bool not null
 - accueil : bool not null
 - createdAt : datetime not null
 - updateAt : datetime null
-- catégorie : categorie not null
+- catégorie : catégorie not null
 }
 
 class Ville{
