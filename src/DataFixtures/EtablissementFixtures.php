@@ -43,7 +43,7 @@ class EtablissementFixtures extends Fixture implements DependentFixtureInterface
             $etablissement->setActif($faker->boolean());
             $etablissement->setAccueil($faker->boolean());
 
-            $etablissement->setVille($this->villeRepository->findOneBy(['id'=>$faker->numberBetween(1,1000)]));
+            $etablissement->setVille($this->villeRepository->findOneBy(['id'=>$faker->numberBetween(1,1908)]));
 
             $etablissement->setCreatedAt($faker->dateTimeBetween('-6month'));
             $refCategorie = $faker->numberBetween(0,4);
