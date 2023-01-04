@@ -29,6 +29,15 @@
                         </li>
                     </ul>
                 </div>
+                <div>
+                    {%  if app.user %}
+                        <a class="btn btn-danger" href="{{ path('app_security_logout') }}">Déconnexion</a>
+
+                    {% else %}
+                        <a class="btn btn-success" href="{{ path('app_security_login') }}">Connexion</a>
+
+                    {% endif %}
+                </div>
             </div>
         </nav></header>
         {% block body %}{% endblock %}
