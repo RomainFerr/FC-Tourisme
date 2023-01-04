@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -9,6 +10,17 @@ use Faker\Factory;
 
 class UserFixtures extends Fixture
 {
+
+    private UserPasswordHasherInterface $hasher;
+
+    /**
+     * @param UserPasswordHasherInterface $hasher
+     */
+    public function __construct(UserPasswordHasherInterface $hasher)
+    {
+        $this->hasher = $hasher;
+    }
+
     public function load(ObjectManager $manager): void
     {
         $faker = Factory::create("fr_FR");
@@ -21,8 +33,12 @@ class UserFixtures extends Fixture
                 ->setCreatedAt($faker->dateTimeBetween('-6 months'))
                 ->setActif($faker->boolean())
                 ->setPseudo($faker->name())
-                ->setPassword(hash('sha512','testtest'))
-            ->setRoles(array('ROLE_USER'));
+                ->setRoles(array('ROLE_USER'));
+            $hashPW = $this->hasher->hashPassword(
+                $user,
+            'password');
+            $user->setPassword($hashPW);
+
             $manager->persist($user);
 
         }
