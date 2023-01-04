@@ -39,10 +39,11 @@ class Utilisateur
 - date de modification : datetime null
 - roles : array not null
 - actif : bool not null
+- favoris : EtablissementArray null
 }
 
 Etablissement "0..*"--"1..1"Ville
 Etablissement "0..*"--"1..*"Catégorie
-
+Etablissement "0..*"--"0..*"Utilisateur
 
 @enduml
