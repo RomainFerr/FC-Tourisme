@@ -31,11 +31,15 @@
                 </div>
                 <div>
                     {%  if app.user %}
+                       <div class="d-flex text-light">
+                        <p class="mx-3 my-auto">{{ app.user.pseudo }}</p>
                         <a class="btn btn-danger" href="{{ path('app_security_logout') }}">Déconnexion</a>
-
+                       </div>
                     {% else %}
+                        <div class="d-flex text-light">
+                        <p class="mx-3 my-auto">Vous n'êtes pas connecté !</p>
                         <a class="btn btn-success" href="{{ path('app_security_login') }}">Connexion</a>
-
+                        </div>
                     {% endif %}
                 </div>
             </div>
