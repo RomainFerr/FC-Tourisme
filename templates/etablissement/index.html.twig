@@ -14,17 +14,61 @@
                 <div class=" col-12 col-md-6 col-lg-4">
                     <div class="card border border-dark" style="height: 100%">
                         <div class="card-body">
-                            <h4 class="card-title">{{ etablissement.nom |capitalize  }}</h4>
-                        <div class="card-subtitle mb-2">
-                            {% for categorie in etablissement.categorie %}
-                                <span class="mb-1 badge bg-info">{{ categorie.nom |capitalize  }}</span>{% endfor %}
-                            <p><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
-                                    <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/>
-                                    <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                                </svg> {{ etablissement.ville.codepostal }}, {{ etablissement.ville.nom }}</p></div>
+                            <div class="row"><h4 class="card-title col-10">{{ etablissement.nom |capitalize }}</h4>
+
+
+                                <div class="col-2 mt-2">
+
+                                    {% if is_granted("ROLE_USER") %}
+
+                                        {% for favoris in etablissement.favoris %}
+
+                                    {% if favoris.id == app.user.id %}
+                                        <a href="{{ path('app_remove_favoris',{id:etablissement.id}) }}">     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"
+                                                     fill="currentColor"
+                                                     class="text-warning bi bi-bookmark-star-fill " viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd"
+                                                          d="M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5zM8.16 4.1a.178.178 0 0 0-.32 0l-.634 1.285a.178.178 0 0 1-.134.098l-1.42.206a.178.178 0 0 0-.098.303L6.58 6.993c.042.041.061.1.051.158L6.39 8.565a.178.178 0 0 0 .258.187l1.27-.668a.178.178 0 0 1 .165 0l1.27.668a.178.178 0 0 0 .257-.187L9.368 7.15a.178.178 0 0 1 .05-.158l1.028-1.001a.178.178 0 0 0-.098-.303l-1.42-.206a.178.178 0 0 1-.134-.098L8.16 4.1z"/>
+                                                </svg></a>
+
+                                            {% else %}
+                                    <a href="{{ path('app_ajout_favoris',{id:etablissement.id}) }}">   <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-bookmark-star text-danger" viewBox="0 0 16 16">
+                                                    <path d="M7.84 4.1a.178.178 0 0 1 .32 0l.634 1.285a.178.178 0 0 0 .134.098l1.42.206c.145.021.204.2.098.303L9.42 6.993a.178.178 0 0 0-.051.158l.242 1.414a.178.178 0 0 1-.258.187l-1.27-.668a.178.178 0 0 0-.165 0l-1.27.668a.178.178 0 0 1-.257-.187l.242-1.414a.178.178 0 0 0-.05-.158l-1.03-1.001a.178.178 0 0 1 .098-.303l1.42-.206a.178.178 0 0 0 .134-.098L7.84 4.1z"/>
+                                                    <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
+                                        </svg></a>
+                                            {% endif %}
+
+                                        {% endfor %}
+
+                                    {% else %}
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-bookmark-star" viewBox="0 0 16 16">
+                                            <path d="M7.84 4.1a.178.178 0 0 1 .32 0l.634 1.285a.178.178 0 0 0 .134.098l1.42.206c.145.021.204.2.098.303L9.42 6.993a.178.178 0 0 0-.051.158l.242 1.414a.178.178 0 0 1-.258.187l-1.27-.668a.178.178 0 0 0-.165 0l-1.27.668a.178.178 0 0 1-.257-.187l.242-1.414a.178.178 0 0 0-.05-.158l-1.03-1.001a.178.178 0 0 1 .098-.303l1.42-.206a.178.178 0 0 0 .134-.098L7.84 4.1z"/>
+                                            <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
+                                        </svg>
+                                    {% endif %}
+
+
+                                </div>
+
+
+
+
+                            </div>
+
+                            <div class="card-subtitle mb-2">
+                                {% for categorie in etablissement.categorie %}
+                                    <span class="mb-1 badge bg-info">{{ categorie.nom |capitalize }}</span>{% endfor %}
+                                <p>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                         class="bi bi-geo-alt" viewBox="0 0 16 16">
+                                        <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/>
+                                        <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                                    </svg> {{ etablissement.ville.codepostal }}, {{ etablissement.ville.nom }}</p>
+                            </div>
                             <p class="card-text">{{ etablissement.description | u.truncate(75, '...') }} </p>
                         </div>
-                        <a href="{{ path('app_etablissement_slug',{'slug': etablissement.slug}) }}" class="mx-5 mb-2 d-flex justify-content-center btn btn-primary">Voir</a>
+                        <a href="{{ path('app_etablissement_slug',{'slug': etablissement.slug}) }}"
+                           class="mx-5 mb-2 d-flex justify-content-center btn btn-primary">Voir</a>
                     </div>
                 </div>
 
