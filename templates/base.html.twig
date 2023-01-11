@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         <!-- CSS only -->
+        <script src="https://kit.fontawesome.com/45e38e596f.js" crossorigin="anonymous"></script>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
@@ -16,8 +17,8 @@
         {% endblock %}
     </head>
     <body>
-    <header><nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
-                <a class="navbar-brand mx-2 mb-1" href="#">FC-Tourisme</a>
+    <header><nav class="navbar navbar-expand-md navbar-dark mb-4" style="background: #3a8fbd">
+                <a class="navbar-brand mx-2 mb-1 h1" href="{{ path('app_acceuil') }}">FC-Tourisme</a>
             <div class="container-fluid">
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav me-auto mb-2 mb-md-0">
@@ -32,13 +33,13 @@
                 <div>
                     {%  if app.user %}
                        <div class="d-flex text-light">
-                        <p class="mx-3 my-auto">{{ app.user.pseudo }}</p>
-                        <a class="btn btn-danger" href="{{ path('app_security_logout') }}">Déconnexion</a>
+                        <p class="mx-3 my-auto">Bienvenue <strong> {{ app.user.pseudo }} </strong>!</p>
+                        <a style="border-radius: 25px;" class="btn btn-danger" href="{{ path('app_security_logout') }}">Déconnexion</a>
                        </div>
                     {% else %}
                         <div class="d-flex text-light">
                         <p class="mx-3 my-auto">Vous n'êtes pas connecté !</p>
-                        <a class="btn btn-success" href="{{ path('app_security_login') }}">Connexion</a>
+                        <a style="border-radius: 25px;" class="btn btn-success" href="{{ path('app_security_login') }}">Connexion</a>
                         </div>
                     {% endif %}
                 </div>

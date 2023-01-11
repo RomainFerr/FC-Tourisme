@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Etablissement;
 use App\Repository\EtablissementRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -71,9 +72,22 @@ $manager->flush();
 
         $manager->persist($etablissement);
         $manager->flush();
-        return $this->redirectToRoute('app_etablissements');
 
+        return $this->redirectToRoute('app_etablissements');
     }
+
+
+
+    #[Route('/etablissements/favoris', name: 'app_etablissement_favoris')]
+    public function getArticleFavoris(UserRepository $userRepository,PaginatorInterface $paginator , Request $request): Response
+    {
+        $user = $userRepository->find(["id"=>$this->getUser()]);
+        $etablissements =$user->getFavoris();
+        return $this->render('etablissement/favoris.html.twig', [
+            'etablissements' => $etablissements,
+        ]);
+    }
+
 
 
 }
