@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+    <section class="container alert alert-secondary p-5">
+        <h1>Inscription</h1>
+        <div class="d-flex justify-content-center">
+            <div class="row mt-5 ">
+            {{ form_start(registrationForm) }}
+
+                <h2 class="h4 mt-3">Pseudonyme</h2>
+
+                <div class="col-12 mt-1">
+
+                    {{ form_row(registrationForm.pseudo) }}
+
+                </div>
+                <h2 class="h4 mt-3">Email</h2>
+
+                <div class="col-12 mt-1">
+
+                    {{ form_row(registrationForm.email) }}
+
+                </div>
+                <h2 class="h4 mt-3">Nom</h2>
+
+                <div class="col-12 mt-1">
+
+                    {{ form_row(registrationForm.nom) }}
+
+                </div>
+                <h2 class="h4 mt-3">Prénom</h2>
+
+                <div class="col-12  mt-1">
+
+                    {{ form_row(registrationForm.prenom) }}
+
+                </div>
+                <h2 class="h4 mt-3">Mot de Passe</h2>
+                <div class="col-12  mt-1">
+
+                    {{ form_row(registrationForm.password) }}
+
+                </div>
+
+                <button type="submit" class="btn btn-primary d-flex mx-auto mt-5 ">Enregistrer</button>
+                {% if form_errors(registrationForm) %}
+                    <div class="alert alert-danger">
+                        {{ form_errors(registrationForm) }}
+                    </div>
+                {% endif %}
+                {{ form_end(registrationForm) }}
+            </div>
+
+        </div>
+    </section>
+{% endblock %}

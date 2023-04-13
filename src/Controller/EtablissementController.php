@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 
 class EtablissementController extends AbstractController
 {
@@ -79,13 +80,18 @@ $manager->flush();
 
 
     #[Route('/etablissements/favoris', name: 'app_etablissement_favoris')]
-    public function getArticleFavoris(UserRepository $userRepository,PaginatorInterface $paginator , Request $request): Response
+    public function getArticleFavoris(Security $security,UserRepository $userRepository,PaginatorInterface $paginator , Request $request): Response
     {
+        $user = $security->getUser();
+        if ($user){
         $user = $userRepository->find(["id"=>$this->getUser()]);
         $etablissements =$user->getFavoris();
         return $this->render('etablissement/favoris.html.twig', [
             'etablissements' => $etablissements,
-        ]);
+        ]);}
+        else{
+            $this->redirectToRoute('app_acceuil');
+        }
     }
 
 

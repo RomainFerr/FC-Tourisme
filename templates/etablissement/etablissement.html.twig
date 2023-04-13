@@ -13,7 +13,8 @@
                     <div class="card rounded bg-light border-secondary" style="height: 100%">
                         <div class="card-body ">
                             <div class="row">
-                            <h2 class="card-title col-10 align-self-center">{{ etablissement.nom | capitalize }}</h2>
+                            <h2 class="card-title col-9 align-self-center">{{ etablissement.nom | capitalize }}</h2><div class=" col-3 "> <img class="rounded" src="https://media.istockphoto.com/id/1322277517/fr/photo/herbe-sauvage-dans-les-montagnes-au-coucher-du-soleil.jpg?s=612x612&w=0&k=20&c=tQ19uZQLlIFy8J6QWMyOL6lPt3pdSHBSDFHoXr1K_g0=" alt="" style="max-height: 100%; max-width: 100%">
+                                </div>
                             <img class="d-flex justify-content-end col-2  " src="{{etablissement.image}}" ></div>
                             <div class="card-subtitle mb-4">
                                 {% for categorie in etablissement.categorie %}
